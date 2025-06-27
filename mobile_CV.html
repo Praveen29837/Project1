@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Praveen Kumar S - Professional Resume</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #1a2a6c);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .resume-container {
+            width: 100%;
+            max-width: 800px;
+            background: white;
+            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.5);
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        /* Header Styles */
+        .header {
+            background: linear-gradient(to right, #2c3e50, #1a252f);
+            color: white;
+            padding: 25px 20px;
+            text-align: center;
+            position: relative;
+            border-bottom: 3px solid #3498db;
+        }
+        
+        .name {
+            font-size: 32px;
+            font-weight: bold;
+            letter-spacing: 1.5px;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+        }
+        
+        .tagline {
+            font-size: 20px;
+            margin-bottom: 8px;
+            letter-spacing: 0.8px;
+            color: #3498db;
+            font-weight: 600;
+        }
+        
+        .achievement {
+            font-size: 16px;
+            font-weight: 500;
+            padding: 8px 0;
+            border-top: 2px solid #3498db;
+            border-bottom: 2px solid #3498db;
+            margin-top: 12px;
+            letter-spacing: 0.5px;
+        }
+        
+        /* Download Button */
+        .download-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 100;
+            background: #2c3e50;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .download-btn:hover {
+            background: #3498db;
+            transform: scale(1.05);
+        }
+        
+        .download-btn:hover::after {
+            content: 'Download PDF';
+            position: absolute;
+            top: 10px;
+            left: 45px;
+            background: #2c3e50;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 13px;
+            white-space: nowrap;
+            font-weight: 500;
+            z-index: 101;
+        }
+        
+        /* Contact Section */
+        .contact {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            background: linear-gradient(to right, #ecf0f1, #d5dbdb);
+            padding: 12px 20px;
+            font-size: 14px;
+            border-bottom: 2px solid #bdc3c7;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 5px 0;
+        }
+        
+        .contact-icon {
+            width: 18px;
+            height: 18px;
+            object-fit: contain;
+        }
+        
+        /* Main Content */
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            padding: 0;
+        }
+        
+        @media (min-width: 768px) {
+            .main-content {
+                flex-direction: row;
+            }
+        }
+        
+        /* Columns */
+        .left-column {
+            width: 100%;
+            background: linear-gradient(to bottom, #f8f9fa, #e9ecef);
+            padding: 20px;
+        }
+        
+        @media (min-width: 768px) {
+            .left-column {
+                width: 35%;
+                padding: 20px 15px;
+                border-right: 1px solid #d6d8db;
+            }
+        }
+        
+        .right-column {
+            width: 100%;
+            padding: 20px;
+            background: #ffffff;
+        }
+        
+        @media (min-width: 768px) {
+            .right-column {
+                width: 65%;
+                padding: 20px 15px;
+            }
+        }
+        
+        /* Section Styles */
+        .section {
+            margin-bottom: 25px;
+            position: relative;
+        }
+        
+        .section-title {
+            background: linear-gradient(to right, #2c3e50, #34495e);
+            color: white;
+            padding: 8px 12px;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-radius: 4px;
+        }
+        
+        .section-icon {
+            width: 20px;
+            height: 20px;
+            object-fit: contain;
+        }
+        
+        /* Skills */
+        .skills-list {
+            list-style-type: none;
+        }
+        
+        .skills-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 14px;
+            position: relative;
+            padding-left: 25px;
+        }
+        
+        .skills-list li:before {
+            content: "•";
+            color: #3498db;
+            position: absolute;
+            left: 0;
+            font-size: 18px;
+            top: 5px;
+        }
+        
+        /* Profile */
+        .profile-text {
+            font-size: 14px;
+            text-align: justify;
+            line-height: 1.6;
+        }
+        
+        /* Certification */
+        .certification-item {
+            margin-bottom: 15px;
+        }
+        
+        .cert-title {
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 5px;
+            color: #2c3e50;
+        }
+        
+        .cert-details {
+            font-size: 13px;
+            margin-bottom: 5px;
+            color: #555;
+        }
+        
+        .cert-list {
+            padding-left: 20px;
+            font-size: 13px;
+            list-style-type: none;
+        }
+        
+        .cert-list li {
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 15px;
+        }
+        
+        .cert-list li:before {
+            content: "▹";
+            color: #3498db;
+            position: absolute;
+            left: 0;
+            font-size: 12px;
+            top: 1px;
+        }
+        
+        /* Experience */
+        .experience-item {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .experience-item:last-child {
+            border-bottom: none;
+        }
+        
+        .company {
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 3px;
+            color: #2c3e50;
+        }
+        
+        .duration {
+            font-style: italic;
+            font-size: 13px;
+            color: #555;
+            margin-bottom: 5px;
+        }
+        
+        .position {
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 8px;
+            color: #3498db;
+        }
+        
+        .highlight {
+            font-weight: 500;
+            font-size: 13px;
+            margin-bottom: 8px;
+            color: #2c3e50;
+            background: #f0f7ff;
+            padding: 6px 10px;
+            border-left: 3px solid #3498db;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .experience-details {
+            padding-left: 15px;
+            list-style-type: none;
+        }
+        
+        .experience-details li {
+            margin-bottom: 8px;
+            font-size: 13px;
+            position: relative;
+            padding-left: 15px;
+        }
+        
+        .experience-details li:before {
+            content: "▸";
+            color: #3498db;
+            position: absolute;
+            left: 0;
+            font-size: 12px;
+            top: 2px;
+        }
+        
+        /* Education */
+        .education-item {
+            margin-bottom: 12px;
+            padding-bottom: 10px;
+            border-bottom: 1px dotted #ddd;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .education-item:last-child {
+            border-bottom: none;
+        }
+        
+        .education-icon {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+            margin-top: 3px;
+        }
+        
+        .education-content {
+            flex: 1;
+        }
+        
+        .education-title {
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 3px;
+            color: #2c3e50;
+        }
+        
+        .education-details {
+            font-size: 13px;
+            color: #555;
+        }
+        
+        /* Page 2 Styles */
+        .page2 {
+            padding: 25px 20px;
+            border-top: 3px solid #2c3e50;
+            background: white;
+        }
+        
+        .summary-title {
+            background: linear-gradient(to right, #2c3e50, #34495e);
+            color: white;
+            padding: 10px 12px;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-radius: 4px;
+        }
+        
+        .summary-icon {
+            width: 24px;
+            height: 24px;
+        }
+        
+        .summary-content {
+            font-size: 14px;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .core-title {
+            background: linear-gradient(to right, #2c3e50, #34495e);
+            color: white;
+            padding: 8px 12px;
+            font-size: 16px;
+            font-weight: bold;
+            margin: 20px 0 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-radius: 4px;
+        }
+        
+        .competency-list {
+            list-style-type: none;
+        }
+        
+        .competency-list li {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px dotted #ddd;
+        }
+        
+        .competency-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .competency-title {
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 5px;
+            color: #2c3e50;
+        }
+        
+        .competency-desc {
+            font-size: 13px;
+            line-height: 1.5;
+        }
+        
+        .impact-title {
+            background: linear-gradient(to right, #2c3e50, #34495e);
+            color: white;
+            padding: 8px 12px;
+            font-size: 16px;
+            font-weight: bold;
+            margin: 20px 0 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-radius: 4px;
+        }
+        
+        .impact-text {
+            font-size: 14px;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .achievements-title {
+            background: linear-gradient(to right, #2c3e50, #34495e);
+            color: white;
+            padding: 8px 12px;
+            font-size: 16px;
+            font-weight: bold;
+            margin: 20px 0 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-radius: 4px;
+        }
+        
+        .achievement-icon {
+            width: 20px;
+            height: 20px;
+        }
+        
+        .achievement-item {
+            margin-bottom: 18px;
+            padding-bottom: 15px;
+            border-bottom: 1px dotted #ddd;
+        }
+        
+        .achievement-item:last-child {
+            border-bottom: none;
+        }
+        
+        .achievement-date {
+            font-weight: bold;
+            font-size: 13px;
+            margin-bottom: 5px;
+            color: #2c3e50;
+            background: #f0f7ff;
+            padding: 6px 10px;
+            display: inline-block;
+            border-radius: 4px;
+        }
+        
+        .achievement-desc {
+            font-size: 13px;
+            line-height: 1.5;
+        }
+        
+        /* Footer */
+        .resume-footer {
+            text-align: center;
+            padding: 12px;
+            font-size: 12px;
+            color: #7f8c8d;
+            background: #f8f9fa;
+            border-top: 1px solid #eee;
+            font-weight: 500;
+        }
+        
+        /* Mobile-specific adjustments */
+        @media (max-width: 767px) {
+            body {
+                padding: 10px;
+            }
+            
+            .header {
+                padding: 20px 15px;
+            }
+            
+            .name {
+                font-size: 26px;
+            }
+            
+            .tagline {
+                font-size: 18px;
+            }
+            
+            .achievement {
+                font-size: 14px;
+            }
+            
+            .contact {
+                flex-direction: column;
+                gap: 8px;
+                padding: 10px 15px;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .download-btn {
+                top: 15px;
+                left: 15px;
+                width: 36px;
+                height: 36px;
+            }
+            
+            .download-btn:hover::after {
+                top: 8px;
+                left: 40px;
+                font-size: 12px;
+                padding: 5px 10px;
+            }
+            
+            .section-title {
+                font-size: 15px;
+            }
+        }
+        
+        /* Print and PDF styles */
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            
+            .resume-container {
+                box-shadow: none;
+                border-radius: 0;
+            }
+            
+            .download-btn {
+                display: none;
+            }
+            
+            .page2 {
+                page-break-before: always;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="resume-container" id="resume">
+        <button class="download-btn" id="downloadPdf">
+            <i class="fas fa-download"></i>
+        </button>
+        
+        <!-- Page 1 -->
+        <div class="header">
+            <div class="name">PRAVEEN KUMAR S</div>
+            <div class="tagline">PROJECT MANAGEMENT</div>
+            <div class="achievement">EMS (Charger Systems) - CNC (Precision Accessories) - 35M + Units Delivered</div>
+        </div>
+        
+        <div class="contact">
+            <div class="contact-info">
+                <div class="contact-item">
+                    <img src="https://raw.githubusercontent.com/Praveen29837/Project1/main/Phone.png" alt="Phone" class="contact-icon">
+                    <span>86089 62352</span>
+                </div>
+                <div class="contact-item">
+                    <img src="https://raw.githubusercontent.com/Praveen29837/Project1/main/Mail.png" alt="Email" class="contact-icon">
+                    <span>appusplash810@gmail.com</span>
+                </div>
+            </div>
+            <div class="contact-item">
+                <img src="https://raw.githubusercontent.com/Praveen29837/Project1/main/Location.png" alt="Location" class="contact-icon">
+                <span>Nungambakkam, Chennai</span>
+            </div>
+        </div>
+        
+        <div class="main-content">
+            <div class="left-column">
+                <div class="section">
+                    <div class="section-title">
+                        <img src="https://raw.githubusercontent.com/Praveen29837/Project1/main/Profile.png" alt="Hard Skills" class="section-icon">
+                        <span>Hard Skills</span>
+                    </div>
+                    <ul class="skills-list">
+                        <li>Project Management</li>
+                        <li>Advanced Excel VBA</li>
+                        <li>Dynamic Dashboard</li>
+                        <li>Proficiency in SAP-SD module</li>
+                        <li>Technical writing</li>
+                        <li>Prompt engineering</li>
+                        <li>AI-Enhanced automation</li>
+                        <li>Risk Management</li>
+                    </ul>
+                </div>
+                
+                <div class="section">
+                    <div class="section-title">
+                        <img src="https://raw.githubusercontent.com/Praveen29837/Project1/main/Profile.png" alt="Soft Skills" class="section-icon">
+                        <span>Soft Skills</span>
+                    </div>
+                    <ul class="skills-list">
+                        <li>Emotional intelligence</li>
+                        <li>Conflict Resolution</li>
+                        <li>Decision making</li>
+                        <li>Strategic Communication</li>
+                        <li>Multi-tasking</li>
+                        <li>Time management</li>
+                        <li>Adaptive & Servant Leadership</li>
+                        <li>Cross-cultural Stakeholder Negotiation</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="right-column">
+                <div class="section">
+                    <div class="section-title">
+                        <img src="https://raw.githubusercontent.com/Praveen29837/Project1/main/Profile.png" alt="Profile" class="section-icon">
+                        <span>Profile</span>
+                    </div>
+                    <p class="profile-text">
+                        Results-driven Project Management professional with 5 years of experience leading complex, cross-functional projects in manufacturing and product development. Skilled in Waterfall & Agile methodologies, with expertise in scope, budget, schedule, and stakeholder management. Proven track record of delivering high-impact projects on time and within budget. Seeking a challenging role to apply my leadership and planning skills to drive successful project outcomes.
+                    </p>
+                </div>
+                
+                <div class="section">
+                    <div class="section-title">
+                        <img src="https://raw.githubusercontent.com/Praveen29837/Project1/main/Certificate.png" alt="Certification" class="section-icon">
+                        <span>Certification</span>
+                    </div>
+                    <div class="certification-item">
+                        <div class="cert-title">PMI Authorized PMP Exam Prep Course | Edu Hubspot</div>
+                        <p class="cert-details">Completed 35 contact hours, fulfilling PMP exam requirement</p>
+                        <ul class="cert-list">
+                            <li>Mastered PMBOK 7 domains: People, Process, Business Environment</li>
+                            <li>Covered predictive (Waterfall), agile, and hybrid methodologies</li>
+                            <li>PMP Examination Scheduled for July 2025</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <div class="section-title">
+                        <img src="https://raw.githubusercontent.com/Praveen29837/Project1/main/Work%20exp.png" alt="Work Experience" class="section-icon">
+                        <span>Work Experience</span>
+                    </div>
+                    <div class="experience-item">
+                        <div class="company">ASTROTECH STEELS PVT LTD</div>
+                        <div class="duration">Nov'24 - Present</div>
+                        <div class="position">Asst. Manager - Projects</div>
+                        <div class="highlight">Leading fabrication projects for the US export market</div>
+                        <ul class="experience-details">
+                            <li>Manage end-to-end project lifecycle from design to shipment across 3 concurrent projects</li>
+                            <li>Coordinate engineering, production & logistics teams (5-8 members)</li>
+                            <li>Ensure ASME standards adherence for the American market</li>
+                            <li>Track project budgets against actuals with &lt;5% variance</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="experience-item">
+                        <div class="company">SALCOMP TECHNOLOGIES INDIA PVT LTD</div>
+                        <div class="duration">Aug'20 - Oct'24</div>
+                        <div class="position">Junior Executive</div>
+                        <div class="highlight">Delivered EMS solutions and CNC projects for electronics manufacturing</div>
+                        <ul class="experience-details">
+                            <li>Managed 4+ EMS/CNC projects through Waterfall methodology</li>
+                            <li>Delivered 35M+ units within schedule & budget constraints</li>
+                            <li>Coordinate all cross-functional teams (10 - 12 members)</li>
+                            <li>Ensure ISO standards adherence for the customer requirement</li>
+                            <li>Oversaw SMT & CNC line setup & enhanced the peak production volume</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <div class="section-title">
+                        <img src="https://raw.githubusercontent.com/Praveen29837/Project1/main/Education.png" alt="Education" class="section-icon">
+                        <span>Education</span>
+                    </div>
+                    <div class="education-item">
+                        <img src="https://raw.githubusercontent.com/Praveen29837/Project1/main/Education.png" alt="Education" class="education-icon">
+                        <div class="education-content">
+                            <div class="education-title">BE - EEE | GPA: 7.5 | Completed in 2020</div>
+                            <div class="education-details">Anna University | Shri Sapthagiri Institute of Technology</div>
+                        </div>
+                    </div>
+                    <div class="education-item">
+                        <img src="https://raw.githubusercontent.com/Praveen29837/Project1/main/Education.png" alt="Education" class="education-icon">
+                        <div class="education-content">
+                            <div class="education-title">HSC - Bio Math's | Score: 82.5% | Completed in 2016</div>
+                            <div class="education-details">Bharathidasan Matriculation Hr. Sec. School</div>
+                        </div>
+                    </div>
+                    <div class="education-item">
+                        <img src="https://raw.githubusercontent.com/Praveen29837/Project1/main/Education.png" alt="Education" class="education-icon">
+                        <div class="education-content">
+                            <div class="education-title">SSLC | Score: 88% | Completed in 2014</div>
+                            <div class="education-details">Bharathidasan Matriculation Hr. Sec. School</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Page 2 -->
+        <div class="page2">
+            <div class="summary-title">
+                <img src="https://raw.githubusercontent.com/Praveen29837/Project1/main/Professional%20summary.png" alt="Professional Summary" class="summary-icon">
+                <span>Professional Summary</span>
+            </div>
+            <p class="summary-content">
+                Results-driven leader with expertise in managing full project lifecycles ($ 2.4 M-$25 M budgets) for manufacturing and product development initiatives. Leverages both Waterfall and Agile methodologies to direct cross-functional teams (5-15 members) across NPD, Production, Quality, and Supply Chain functions for both internal & external projects. Proven ability to deliver 4.3 M-35 M project deliveries ahead of schedule (SPI: 1.05) while maintaining 98.3 %+ quality yield.
+            </p>
+            
+            <div class="core-title">
+                <img src="https://raw.githubusercontent.com/Praveen29837/Project1/main/Profile.png" alt="Core Competencies" class="section-icon">
+                <span>Core Competencies & Achievements</span>
+            </div>
+            <ul class="competency-list">
+                <li>
+                    <div class="competency-title">End-to-End Project Leadership:</div>
+                    <div class="competency-desc">Managed initiation to closure, including charter development, WBS creation, EVM implementation (tracking CPI/SPI), and formal lessons learned documentation</div>
+                </li>
+                <li>
+                    <div class="competency-title">Financial Stewardship:</div>
+                    <div class="competency-desc">Controlled project baselines through rigorous budget tracking, expense monitoring, sales forecasting, and financial reporting to senior stakeholders</div>
+                </li>
+                <li>
+                    <div class="competency-title">Risk & Quality Management:</div>
+                    <div class="competency-desc">Mitigated project risks through structured assessment and contingency planning while maintaining ISO-compliant quality standards</div>
+                </li>
+                <li>
+                    <div class="competency-title">Stakeholder Engagement:</div>
+                    <div class="competency-desc">Maintained executive alignment through governance meetings, KPI dashboards, and conflict resolution across CFT teams</div>
+                </li>
+                <li>
+                    <div class="competency-title">Commercial Operations:</div>
+                    <div class="competency-desc">Managed customer relationships end-to-end, including contract deliverables, payment reconciliation, complaint resolution, and sales performance reporting</div>
+                </li>
+                <li>
+                    <div class="competency-title">Resource Optimization:</div>
+                    <div class="competency-desc">Scaled production capacity to 30K units/day through phased line qualifications and targeted competency development</div>
+                </li>
+                <li>
+                    <div class="competency-title">Methodology Integration:</div>
+                    <div class="competency-desc">Applied schedule compression techniques in Waterfall projects while utilizing Agile sprints for iterative deliverables</div>
+                </li>
+            </ul>
+            
+            <div class="impact-title">Business Impact</div>
+            <p class="impact-text">
+                Consistently delivers complex projects within triple constraints while driving operational improvements in manufacturing execution and cross-functional collaboration. Expertise in translating technical requirements into business outcomes through rigorous change control and stakeholder communication frameworks.
+            </p>
+            
+            <div class="achievements-title">
+                <img src="https://raw.githubusercontent.com/Praveen29837/Project1/main/Medal.png" alt="Achievements" class="achievement-icon">
+                <span>Achievements</span>
+            </div>
+            <div class="achievement-item">
+                <div class="achievement-date">Jul 22 - Dec 22</div>
+                <div class="achievement-desc">Got centum score from FATP sites & ODM continuously for adhering the demand plan & for responding immensely to customer feedbacks</div>
+            </div>
+            <div class="achievement-item">
+                <div class="achievement-date">Nov 23 - Oct 24</div>
+                <div class="achievement-desc">Spearheaded end-to-end Manufacturing Execution System (MES) deployment across 386 Fanuc CNC machines, enabling data-driven operational control. Achieved 22% OEE increase and 15% reduction in unplanned downtime through live monitoring of cycle times, tool wear, and machine utilization.</div>
+            </div>
+            <div class="achievement-item">
+                <div class="achievement-date">Mar 23 - Sep 24</div>
+                <div class="achievement-desc">Governed $35M budgets with &lt;2.4% variance using EVM tracking, preventing $820K in potential overruns</div>
+            </div>
+            <div class="achievement-item">
+                <div class="achievement-date">Jan 25 - Jun 25</div>
+                <div class="achievement-desc">Led organizational ERP transition from traditional systems to Microsoft Dynamics NAV, aligning 6 departments (IT, Planning, Finance, Warehouse, Production, Quality) with standardized processes. Managed cross-functional change through stakeholder training and phased cutover, eliminating month-end stock and improving inventory accuracy to 99.2%.</div>
+            </div>
+        </div>
+        
+        <div class="resume-footer">
+            Professional Resume | Praveen Kumar S | Last Updated: June 2025
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('downloadPdf').addEventListener('click', function() {
+            const element = document.getElementById('resume');
+            
+            // Optimize for PDF generation
+            const originalStyles = document.querySelectorAll('style, link[rel="stylesheet"]');
+            originalStyles.forEach(style => style.setAttribute('media', 'print'));
+            
+            const options = {
+                margin: 10,
+                filename: 'Praveen_Kumar_Resume.pdf',
+                image: { 
+                    type: 'jpeg', 
+                    quality: 0.98 
+                },
+                html2canvas: { 
+                    scale: 2,
+                    useCORS: true,
+                    logging: false,
+                    allowTaint: false,
+                    backgroundColor: '#FFFFFF'
+                },
+                jsPDF: { 
+                    unit: 'mm', 
+                    format: 'a4', 
+                    orientation: 'portrait' 
+                },
+                pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+            };
+            
+            // Show processing indicator
+            const originalHTML = this.innerHTML;
+            this.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+            this.disabled = true;
+            
+            // Generate PDF
+            html2pdf().set(options).from(element).save().then(() => {
+                // Restore button
+                this.innerHTML = originalHTML;
+                this.disabled = false;
+                
+                // Restore original styles
+                originalStyles.forEach(style => style.removeAttribute('media'));
+            }).catch(err => {
+                console.error('PDF generation failed:', err);
+                this.innerHTML = originalHTML;
+                this.disabled = false;
+                originalStyles.forEach(style => style.removeAttribute('media'));
+            });
+        });
+    </script>
+</body>
+</html>
