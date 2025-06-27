@@ -70,11 +70,11 @@
             letter-spacing: 0.5px;
         }
         
-        /* Download Button */
+        /* Download Button - Now on the left */
         .download-btn {
             position: absolute;
             top: 25px;
-            right: 25px;
+            left: 25px; /* Changed from right to left */
             z-index: 100;
             background: #2c3e50;
             color: white;
@@ -95,11 +95,12 @@
             transform: scale(1.1);
         }
         
+        /* Tooltip now appears to the right */
         .download-btn:hover::after {
             content: 'Download PDF';
             position: absolute;
-            top: 55px;
-            right: 0;
+            top: 15px;
+            left: 55px; /* Position to the right */
             background: #2c3e50;
             color: white;
             padding: 8px 15px;
@@ -107,6 +108,7 @@
             font-size: 14px;
             white-space: nowrap;
             font-weight: 500;
+            z-index: 101;
         }
         
         .download-btn i {
@@ -586,6 +588,7 @@
 </head>
 <body>
     <div class="resume-container" id="resume">
+        <!-- Download button moved to top-left -->
         <button class="download-btn" id="downloadPdf">
             <i class="fas fa-download"></i>
         </button>
