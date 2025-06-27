@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Praveen Kumar Resume</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet"/>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Roboto', sans-serif; }
+    body { background: #f5f5f5; padding: 40px; }
+
+    .resume-wrapper {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #fff;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      padding: 30px;
+      position: relative;
+    }
+
+    .menu {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      cursor: pointer;
+    }
+
+    .menu:hover .dropdown {
+      display: block;
+    }
+
+    .dot {
+      height: 5px;
+      width: 5px;
+      background-color: #333;
+      border-radius: 50%;
+      display: block;
+      margin: 4px 0;
+    }
+
+    .dropdown {
+      display: none;
+      position: absolute;
+      background: white;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      padding: 10px;
+      z-index: 10;
+      top: 20px;
+      left: 0;
+    }
+
+    .dropdown button {
+      background: none;
+      border: none;
+      color: #333;
+      cursor: pointer;
+    }
+
+    h1 { font-size: 32px; font-weight: 700; color: #003366; }
+    h2 { font-size: 20px; margin-top: 20px; color: #444; }
+    p, li { font-size: 14px; line-height: 1.6; }
+
+    .section { margin-top: 30px; }
+    .contact-info, .skills, .experience, .education, .summary, .achievements {
+      padding: 10px 0;
+    }
+
+    /* Add your styling based on PDF inspection here */
+
+  </style>
+</head>
+<body>
+
+<div class="resume-wrapper" id="resume">
+
+  <div class="menu">
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <div class="dropdown">
+      <button onclick="downloadPDF()">Download PDF</button>
+    </div>
+  </div>
+
+  <h1>Praveen Kumar S</h1>
+  <h2>Project Management</h2>
+
+  <div class="section contact-info">
+    <p><strong>Phone:</strong> 86089 62352</p>
+    <p><strong>Email:</strong> appusplash810@gmail.com</p>
+    <p><strong>Location:</strong> Nungambakkam, Chennai</p>
+  </div>
+
+  <div class="section summary">
+    <h2>Professional Summary</h2>
+    <p>Results-driven Project Management professional with 5 years... [full summary here]</p>
+  </div>
+
+  <div class="section skills">
+    <h2>Hard Skills</h2>
+    <ul>
+      <li>Project Management</li>
+      <li>Advanced Excel VBA</li>
+      <li>Dynamic Dashboard</li>
+      <!-- Add the rest -->
+    </ul>
+
+    <h2>Soft Skills</h2>
+    <ul>
+      <li>Emotional Intelligence</li>
+      <li>Conflict Resolution</li>
+      <!-- etc. -->
+    </ul>
+  </div>
+
+  <div class="section experience">
+    <h2>Work Experience</h2>
+    <p><strong>Asst. Manager – Projects</strong> at Astrotech Steels Pvt Ltd (Nov’24 – Present)</p>
+    <ul>
+      <li>Leading fabrication projects for US export market</li>
+      <li>Ensure ASME standards adherence</li>
+      <!-- etc. -->
+    </ul>
+  </div>
+
+  <div class="section education">
+    <h2>Education</h2>
+    <p><strong>BE - EEE</strong> (GPA: 7.5), Anna University</p>
+    <p><strong>HSC – Bio Maths:</strong> 82.5%</p>
+    <p><strong>SSLC:</strong> 88%</p>
+  </div>
+
+  <div class="section achievements">
+    <h2>Achievements</h2>
+    <ul>
+      <li>Got centum score from FATP sites...</li>
+      <li>Governed $35M budgets with <2.4% variance...</li>
+      <!-- etc. -->
+    </ul>
+  </div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+<script>
+  function downloadPDF() {
+    const element = document.getElementById("resume");
+    html2pdf().set({
+      margin: 0.5,
+      filename: 'Praveen_Kumar_Resume.pdf',
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2 },
+      jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+    }).from(element).save();
+  }
+</script>
+
+</body>
+</html>
