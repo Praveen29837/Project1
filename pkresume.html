@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Praveen Kumar S - Resume</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -14,24 +15,99 @@
         }
         
         body {
-            background-color: #f0f2f5;
+            background-color: #f5f7fa;
             color: #333;
             line-height: 1.6;
             padding: 20px;
+            position: relative;
         }
         
         .resume-container {
-            max-width: 800px;
+            max-width: 794px; /* A4 width in pixels */
+            min-height: 1123px; /* A4 height in pixels */
             margin: 0 auto;
             background: white;
             box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+            padding-bottom: 20px;
+        }
+        
+        .page-break {
+            page-break-before: always;
+            height: 20px;
+        }
+        
+        /* Download Menu */
+        .download-menu {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+        }
+        
+        .menu-btn {
+            background: #2c3e50;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .menu-btn:hover {
+            background: #1a252f;
+            transform: scale(1.05);
+        }
+        
+        .menu-options {
+            position: absolute;
+            top: 50px;
+            right: 0;
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.15);
+            width: 180px;
+            overflow: hidden;
+            display: none;
+        }
+        
+        .download-menu:hover .menu-options {
+            display: block;
+        }
+        
+        .menu-option {
+            padding: 12px 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #333;
+            text-decoration: none;
+            transition: all 0.2s;
+            font-size: 14px;
+        }
+        
+        .menu-option:hover {
+            background: #f0f5ff;
+            color: #2c3e50;
+        }
+        
+        .menu-option i {
+            width: 20px;
+            text-align: center;
         }
         
         /* Header Styles */
         .header {
             background-color: #2c3e50;
             color: white;
-            padding: 30px 40px;
+            padding: 30px 40px 20px;
             text-align: center;
         }
         
@@ -45,6 +121,7 @@
         .tagline {
             font-size: 20px;
             margin-bottom: 8px;
+            font-weight: 500;
         }
         
         .achievement {
@@ -131,6 +208,7 @@
         .profile-text {
             font-size: 14px;
             text-align: justify;
+            line-height: 1.7;
         }
         
         /* Certification */
@@ -147,6 +225,7 @@
         .cert-details {
             font-size: 13px;
             margin-bottom: 5px;
+            color: #444;
         }
         
         .cert-list {
@@ -156,6 +235,7 @@
         
         .cert-list li {
             margin-bottom: 5px;
+            line-height: 1.5;
         }
         
         /* Experience */
@@ -167,6 +247,7 @@
             font-weight: bold;
             font-size: 16px;
             margin-bottom: 3px;
+            color: #2c3e50;
         }
         
         .duration {
@@ -180,7 +261,14 @@
             font-weight: bold;
             font-size: 14px;
             margin-bottom: 8px;
-            color: #2c3e50;
+            color: #1a5276;
+        }
+        
+        .highlight {
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 8px;
+            color: #e74c3c;
         }
         
         .experience-details {
@@ -190,6 +278,7 @@
         .experience-details li {
             margin-bottom: 6px;
             font-size: 13px;
+            line-height: 1.5;
         }
         
         /* Education */
@@ -211,7 +300,6 @@
         /* Page 2 Styles */
         .page2 {
             padding: 30px 40px;
-            border-top: 2px solid #2c3e50;
         }
         
         .summary-title {
@@ -257,6 +345,7 @@
         
         .competency-desc {
             font-size: 13px;
+            line-height: 1.6;
         }
         
         .impact-title {
@@ -287,6 +376,8 @@
         
         .achievement-item {
             margin-bottom: 20px;
+            padding-left: 15px;
+            border-left: 3px solid #3498db;
         }
         
         .achievement-date {
@@ -301,6 +392,16 @@
             line-height: 1.6;
         }
         
+        /* Footer */
+        .resume-footer {
+            text-align: center;
+            padding: 15px;
+            font-size: 12px;
+            color: #7f8c8d;
+            border-top: 1px solid #ecf0f1;
+            margin-top: 20px;
+        }
+        
         @media print {
             body {
                 padding: 0;
@@ -311,11 +412,30 @@
                 margin: 0;
                 max-width: 100%;
             }
+            .download-menu {
+                display: none;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="resume-container">
+    <div class="download-menu">
+        <button class="menu-btn">
+            <i class="fas fa-ellipsis-v"></i>
+        </button>
+        <div class="menu-options">
+            <a href="#" class="menu-option" id="download-pdf">
+                <i class="fas fa-download"></i>
+                Download PDF
+            </a>
+            <a href="#" class="menu-option">
+                <i class="fas fa-print"></i>
+                Print Resume
+            </a>
+        </div>
+    </div>
+
+    <div class="resume-container" id="resume-content">
         <!-- Page 1 -->
         <div class="header">
             <div class="name">PRAVEEN KUMAR S</div>
@@ -441,6 +561,7 @@
         </div>
         
         <!-- Page 2 -->
+        <div class="page-break"></div>
         <div class="page2">
             <div class="summary-title">Professional Summary</div>
             <p class="summary-content">
@@ -502,6 +623,34 @@
                 <div class="achievement-desc">Led organizational ERP transition from traditional systems to Microsoft Dynamics NAV, aligning 6 departments (IT, Planning, Finance, Warehouse, Production, Quality) with standardized processes. Managed cross-functional change through stakeholder training and phased cutover, eliminating month-end stock and improving inventory accuracy to 99.2%.</div>
             </div>
         </div>
+        
+        <div class="resume-footer">
+            Praveen Kumar S - Resume | Updated: June 2025
+        </div>
     </div>
+
+    <script>
+        document.getElementById('download-pdf').addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Get the resume element
+            const element = document.getElementById('resume-content');
+            
+            // Options for PDF generation
+            const options = {
+                margin: 10,
+                filename: 'Praveen_Kumar_Resume.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+            
+            // Generate PDF
+            html2pdf()
+                .set(options)
+                .from(element)
+                .save();
+        });
+    </script>
 </body>
 </html>
